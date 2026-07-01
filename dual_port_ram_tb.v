@@ -56,16 +56,49 @@ endtask
 
 initial
 begin
-    @(negedge clock)
+    @(negedge reset)
 stimula(1,0,3,0,8'd3); // write 
 stimula(1,0,123,0,8'd5); // write 
-stimula(1,0,233,0,8'd15); // write 
+stimula(1,0,17233,0,8'd15); // write over the depth 
 stimula(1,0,453,0,8'd25); // write
+stimula(1,0,453,0,8'd55); // overwrite
+
 
 stimula(0,1,0,3,8'd0); // read
+#1;
+if(data_out == 8'd3)
+    $display("PASS");
+else
+    $display("FAIL");
+
 stimula(0,1,0,123,8'd0); // read
-stimula(0,1,0,233,8'd0); // read
+#1;
+if(data_out == 8'd5)
+    $display("PASS");
+else
+    $display("FAIL");
+
+stimula(0,1,0,17233,8'd0); // read happens at 849 because it consider 14 bits from LSB 
+#1;
+if(data_out == 8'd15)
+    $display("PASS");
+else
+    $display("FAIL");
+
 stimula(0,1,0,453,8'd0); // read
+#1;
+if(data_out == 8'd25)
+    $display("PASS");
+else
+    $display("FAIL");
+
+stimula(0,1,0,453,8'd0); // overwrite's read
+#1;
+if(data_out == 8'd55)
+    $display("PASS");
+else
+    $display("FAIL");
+
 
 stimula(1,0,267,0,8'd89); // read
 stimula(1,1,900,267,8'd7); // write and read  
@@ -74,7 +107,7 @@ stimula(1,1,900,267,8'd7); // write and read
     write_en = 0;
     read_en  = 0;
 
-    #20;
+    #2000;
 
     $display("Simulation Finished");
     $finish;
