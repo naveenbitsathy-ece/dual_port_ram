@@ -18,12 +18,8 @@ integer i;
 always@(posedge clock)
 begin
     if(reset)
-    begin 
     data_out <= 0;
-    for(i=0;i<16384;i=i+1)
-    mem[i] <= 0;
-    end 
-
+    
     else 
     begin 
       if(write_en && read_en)
@@ -31,6 +27,7 @@ begin
         mem[wr_addr] <= data_in;
         data_out <= mem[rd_addr]; 
     end 
+        
     else if(write_en)
     mem[wr_addr] <= data_in;
     else if(read_en)
