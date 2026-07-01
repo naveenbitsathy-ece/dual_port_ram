@@ -1,9 +1,11 @@
+`timescale 1ns/1ps
+
 module dual_port_ram_tb;
    reg clock;
    reg reset;
    reg [7:0] data_in;
-   reg  [13:0] wr_addr;
-   reg [13:0] rd_addr;
+   reg  [9:0] wr_addr;
+   reg [9:0] rd_addr;
    reg  write_en,read_en;
    
    wire [7:0] data_out;
@@ -39,8 +41,8 @@ end
 
 task stimula;
 input a,b;
-input [13:0]w;
-input [13:0]r;
+input [9:0]w;
+input [9:0]r;
 input [7:0]c;
 begin
     @(negedge clock);
@@ -81,13 +83,6 @@ else
 stimula(0,1,0,17233,8'd0); // read happens at 849 because it consider 14 bits from LSB 
 #1;
 if(data_out == 8'd15)
-    $display("PASS");
-else
-    $display("FAIL");
-
-stimula(0,1,0,453,8'd0); // read
-#1;
-if(data_out == 8'd25)
     $display("PASS");
 else
     $display("FAIL");

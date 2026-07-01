@@ -5,14 +5,14 @@ module dual_port_ram(
     input reset,  
     input write_en,
     input read_en,
-    input [13:0]wr_addr,      //16KB = 16 * 1024 = 16384 == 2^14;
-    input [13:0]rd_addr,
+    input [9:0]wr_addr,      //1KB =  1024;
+    input [9:0]rd_addr,
     input [7:0]data_in,
 
     output reg [7:0]data_out
 );
 
-reg [7:0]mem[16383:0];      // 16 * 1024 = 16384
+reg [7:0]mem[1023:0];      // 1024
 integer i;
 
 always@(posedge clock)
@@ -20,8 +20,7 @@ begin
     if(reset)
     begin 
     data_out <= 0;
-    for(i=0;i<16384;i=i+1)
-    mem[i] <= 0;
+  
     end 
 
     else 
