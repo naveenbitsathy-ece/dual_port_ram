@@ -5,7 +5,7 @@ module dual_port_ram(
     input reset,  
     input write_en,
     input read_en,
-    input [9:0]wr_addr,      //16KB = 16 * 1024 = 16384 == 2^14;
+    input [9:0]wr_addr,      //1KB = 1 * 1024 = 1024 == 2^10;
     input [9:0]rd_addr,
     input [7:0]data_in,
 
@@ -21,7 +21,7 @@ begin
     begin 
     data_out <= 0;
     for(i=0;i<1024;i=i+1)
-    mem
+        mem[i] <= 8'b0;
     end 
 
     else 
