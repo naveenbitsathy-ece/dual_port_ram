@@ -199,20 +199,9 @@ Dual_Port_RAM/
 
 ---
 
-# 🚀 Future Improvements
-
-- Parameterized Memory Size
-- Byte Enable Support
-- Memory Initialization using `$readmemh`
-- True Dual Port RAM
-- Independent Read and Write Clocks
-- Error Detection (Parity/ECC)
-
----
-
 # 👨‍💻 Author
 
-**Naveen Bitsathy**
+**Naveenraj Senthilkumar**
 
 Electronics and Communication Engineering (ECE)
 
